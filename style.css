@@ -1,0 +1,145 @@
+html, body {
+    background-color: #132639;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards {
+    width: 100%;
+    height: 40vh;
+    cursor: pointer;
+}
+
+.cards .card {
+    width: 18vw;
+    height: 25vw;
+    /* background-color: #fff; */
+    position: absolute;
+    top: 35%;
+
+    transform: rotatey(0deg);
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    
+
+
+}
+
+.cards .card .face {
+    background-color: white;
+    color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    /*測試是否正反都出現*/
+    /* opacity:0.5; */
+
+    backface-visibility: hidden;
+
+    border-radius: 10px;
+
+    /*做完之後會發現仍舊一樣,是因為背景顏色蓋過去的關係, 清除 .cards .card 下的background-color: #fff;*/
+}
+
+.cards .card .face.front {
+    background-color: white;
+    /* 設定不同於反面的顏色以方便下面的翻牌檢測*/
+    transform: rotateY(180deg);
+    /* 可以調整角度來判斷*/
+
+    /*1. 轉為180度之後 應該要看到反面才對, 所以要在.cards .card .face 中加入 backface-visibility: hidden; 可以再調整一下 transform來觀察正反面 */
+
+    /*2. 調整卡片內容 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: black;
+}
+
+.cards .card .face.back {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cards .card .face.back:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: solid 3px red;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+
+    background-image: url('DuckCone.png');
+
+    /* 利用CSS繪圖完成牌卡 */
+    /* background-image: linear-gradient(-60deg, transparent 40%, red 40%, red 60%, trans); */
+
+}
+
+.cards .card.open {
+    transform: rotate(0deg) rotatey(180deg);
+
+}
+
+/* 設定卡片位置 */
+.cards .card[data-order="1"] {
+    left: calc(20% - 9vw);
+
+}
+
+.cards .card[data-order="2"] {
+    left: calc(40% - 9vw);
+
+}
+
+.cards .card[data-order="3"] {
+    left: calc(60% - 9vw);
+
+}
+
+.cards .card[data-order="4"] {
+    left: calc(80% - 9vw);
+
+}
+
+.cards .card:hover {
+    top: 30%;
+
+}
+
+.cards .card {
+    transition: left 0.5s, top 0.5s, transform 1s;
+}
+
+.cards.gather .card {
+    top: 20%;
+    left: calc(50% - 7.5vw);
+    transform: rotate(360deg);
+}
+
+.cards.gather:hover .card[data-order="1"] {
+    transform: rotate(357deg);
+}
+
+.cards.gather:hover .card[data-order="2"] {
+    transform: rotate(364deg);
+}
+
+.cards.gather:hover .card[data-order="3"] {
+    transform: rotate(371deg);
+}
+
+.cards.gather:hover .card[data-order="4"] {
+    transform: rotate(378deg);
+}

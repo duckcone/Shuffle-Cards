@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./style.css">
+    <title>CBB108018_郭明穎</title>
+</head>
+
+<body>
+    
+    <div id="app">
+        <h2>{{state}}</h2>
+        <div class="control">
+            <input type="checkbox" v-model="gather">收放卡片
+            <input type="checkbox" v-for="(card, cid) in cards" v-model="card.open">
+            <button @click="shuffle">Shuffle Cards</button>
+            <button @click="startGame">Play Game</button>
+        </div>
+        <div class="cards" :class="{gather: gather}">
+            <div class="card" v-for="card in cards" :data-order="card.id" :class="{open: card.open}" @click="openCard(card)">
+                <div class="face back"></div>
+                <div class="face front">{{getSymbol(card.label)}}</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
+    <script src="./script.js "></script>
+
+
+</body>
+
+</html>
